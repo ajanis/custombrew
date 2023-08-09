@@ -27,6 +27,14 @@ Installing the formula: ```ajanis/custombrew/sshpass``` points to the repository
 
 ## Installation
 
+Currently there is 1 Formula available:
+
+- `sshpass`: A tool for non-interactive SSH login where a password is required
+  
+__NOTE: This is considered extremely insecure.  You should use SSH Keys whenever possible and otherwise, use interactive password login!!__
+  
+  _This utility is for edge case laziness and (unless handled appropriately) will leave a cleartext password in your current terminal session and in your command history._
+
 ### Install Homebrew
 
 You will of course need to install [Homebrew](https://brew.sh), which you can quickly do with the following command:
@@ -35,41 +43,47 @@ You will of course need to install [Homebrew](https://brew.sh), which you can qu
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-### Install the custom Tap 
+### Install the custom Tap
 
 ```shell
 ❯ brew tap ajanis/custombrew
 
 ==> Tapping ajanis/custombrew
 Cloning into '/opt/homebrew/Library/Taps/ajanis/homebrew-custombrew'...
-remote: Enumerating objects: 13, done.
-remote: Counting objects: 100% (13/13), done.
-remote: Compressing objects: 100% (11/11), done.
-remote: Total 13 (delta 1), reused 12 (delta 0), pack-reused 0
-Receiving objects: 100% (13/13), done.
-Resolving deltas: 100% (1/1), done.
-Tapped 2 formulae (14 files, 10.9KB).
+remote: Enumerating objects: 16, done.
+remote: Counting objects: 100% (16/16), done.
+remote: Compressing objects: 100% (13/13), done.
+remote: Total 16 (delta 2), reused 15 (delta 1), pack-reused 0
+Receiving objects: 100% (16/16), done.
+Resolving deltas: 100% (2/2), done.
+Tapped 1 formula (13 files, 11.7KB).
+```
+```shell
+❯ brew tap-info ajanis/custombrew
 
+ajanis/custombrew: 1 formula
+/opt/homebrew/Library/Taps/ajanis/homebrew-custombrew (13 files, 11.8KB)
+From: https://github.com/ajanis/homebrew-custombrew
 ```
 
 ### Install the Formula
 
-Currently there are 2 Formulae available from this repo:
-
-- `sshpass`: A tool for non-interactive SSH login where a password is required
-  
-  __NOTE: This is considered extremely insecure.  You should use SSH Keys whenever possible and otherwise, use interactive password login!!__
-  
-  _This utility is for edge case laziness and (unless handled appropriately) will leave a cleartext password in your current terminal session and in your command history._
-
-- `retry`: A tool for retrying shell commands
-  Provided by 
-
 ```shell
-brew install ajanis/custombrew/sshpass
-brew install ajanis/custombrew/retry
+❯ brew install ajanis/custombrew/sshpass
+
+==> Fetching ajanis/custombrew/sshpass
+==> Downloading http://sourceforge.net/projects/sshpass/files/sshpass/1.06/sshpass-1.06.tar.gz
+==> Downloading from https://cytranet.dl.sourceforge.net/project/sshpass/sshpass/1.06/sshpass-1.06.tar.gz
+######################################################################################################################################################################################################################################################### 100.0%
+==> Installing sshpass from ajanis/custombrew
+==> Downloading https://formulae.brew.sh/api/formula.jws.json
+
+==> ./configure
+==> make install
+==> Downloading https://formulae.brew.sh/api/cask.jws.json
+
+🍺  /opt/homebrew/Cellar/sshpass/1.06: 8 files, 78.5KB, built in 17 seconds
+==> Running `brew cleanup sshpass`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
 ```
-
-
-
-
