@@ -27,7 +27,7 @@ Installing the formula: ```ajanis/custombrew/sshpass``` points to the repository
 
 ## Installation
 
-### Homebrew
+### Install Homebrew
 
 You will of course need to install [Homebrew](https://brew.sh), which you can quickly do with the following command:
   
@@ -35,22 +35,35 @@ You will of course need to install [Homebrew](https://brew.sh), which you can qu
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-### Tap Only
+### Install the custom Tap 
 
 ```shell
-$ brew tap ajanis/custombrew
+❯ brew tap ajanis/custombrew
 
 ==> Tapping ajanis/custombrew
 Cloning into '/opt/homebrew/Library/Taps/ajanis/homebrew-custombrew'...
-remote: Enumerating objects: 6, done.
-remote: Counting objects: 100% (6/6), done.
-remote: Compressing objects: 100% (6/6), done.
-remote: Total 6 (delta 0), reused 6 (delta 0), pack-reused 0
-Receiving objects: 100% (6/6), done.
-Tapped (14 files, 8.3KB).
+remote: Enumerating objects: 13, done.
+remote: Counting objects: 100% (13/13), done.
+remote: Compressing objects: 100% (11/11), done.
+remote: Total 13 (delta 1), reused 12 (delta 0), pack-reused 0
+Receiving objects: 100% (13/13), done.
+Resolving deltas: 100% (1/1), done.
+Tapped 2 formulae (14 files, 10.9KB).
+
 ```
 
-### Formula
+### Install the Formula
+
+Currently there are 2 Formulae available from this repo:
+
+- `sshpass`: A tool for non-interactive SSH login where a password is required
+  
+  __NOTE: This is considered extremely insecure.  You should use SSH Keys whenever possible and otherwise, use interactive password login!!__
+  
+  _This utility is for edge case laziness and (unless handled appropriately) will leave a cleartext password in your current terminal session and in your command history._
+
+- `retry`: A tool for retrying shell commands
+  Provided by 
 
 ```shell
 brew install ajanis/custombrew/sshpass
