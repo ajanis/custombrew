@@ -1,7 +1,7 @@
 require 'formula'
 class SshuttleSpocHelper < Formula
-  homepage "https://github.com/ajanis/spoctunnel"
-  url "https://github.com/ajanis/spoctunnel/archive/v1.1.1.tar.gz"
+  homepage "https://github.com/ajanis/sshuttle-spoc-helper"
+  url "https://github.com/ajanis/sshuttle-spoc-helper/archive/v1.1.1.tar.gz"
   version "1.0.0"
   sha256 "6453616e2592d139023b8c96464ce81383ee3a1faf3c79fb5bc6e694dfff2c52"
 
