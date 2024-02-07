@@ -1,9 +1,12 @@
 require 'formula'
-class SshuttleSpocHelper < Formula
+class Spoctunnel < Formula
   homepage "https://github.com/ajanis/sshuttle-spoc-helper"
   url "https://github.com/ajanis/sshuttle-spoc-helper/archive/v1.0.0.tar.gz"
   version "1.0.0"
   sha256 "5a90374f72028dfc6c8744f2b78f8414c8801837"
+
+  depends_on "sshuttle"
+  depends_on "ajanis/custombrew/sshpass"
 
   # shasum -a 256 v1.1.tar.gz
 
