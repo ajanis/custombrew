@@ -16,7 +16,7 @@ class Spoctunnel < Formula
     # Remove existing direcrtory if exists
     FileUtils.rm_rf install_dir if install_dir.exist?
     # Install script folder to libexec/"spoctunnel"
-    libexec.install "spoctunnel"
+    libexec.install Dir["*"]
     # Replace /libexec/ with HOMEBREW_PREFIX in scripts
     inreplace "spoctunnel/spoctunnel.sh", "/libexec/", HOMEBREW_PREFIX
     inreplace "spoctunnel/spoctunnel.sh", "spoctunnel_version", version
