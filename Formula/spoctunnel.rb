@@ -1,9 +1,9 @@
 require 'formula'
 class Spoctunnel < Formula
   homepage "https://github.com/ajanis/spoc-sshuttle-helper"
-  url "https://github.com/ajanis/spoc-sshuttle-helper/releases/download/v1.0.1/v1.0.1.tar.gz"
-  version "1.0.1"
-  sha256 "5193f6949efce8b335958260f241b8a131969cd9fbddd1b8e2d13f0c65284d98"
+  url "https://github.com/ajanis/spoc-sshuttle-helper/releases/download/v1.0.2/v1.0.2.tar.gz"
+  version "1.0.2"
+  sha256 "c477cde0ef39ab058dc09b75185ffae4c1cf1dd6a55147780461e89b4818e109"
 
   depends_on "sshuttle"
   depends_on "ajanis/custombrew/sshpass"
@@ -11,17 +11,14 @@ class Spoctunnel < Formula
   # shasum -a 256 v1.1.tar.gz
 
   def install
-    # Set install directory
-    install_dir = libexec/"spoctunnel"
-    # Remove existing direcrtory if exists
-    FileUtils.rm_rf install_dir if install_dir.exist?
     # Replace /libexec/ with HOMEBREW_PREFIX in scripts
-    inreplace "spoctunnel/spoctunnel.sh", "/libexec/", HOMEBREW_PREFIX
-    inreplace "spoctunnel/spoctunnel.sh", "spoctunnel_version", version
+    inreplace "bin/spoctunnel.sh", "HOMEBREW_PREFIX", HOMEBREW_PREFIX
+    inreplace "bin/spoctunnel.sh", "spoctunnel_version", version
     # Install script folder to libexec/"spoctunnel"
-    libexec.install Dir["*"]
+    libexec.install Dir["libexec/*"]
+    bin.install "bin/spoctunnel.sh"
     # Create an executable for the spoctunnel.sh helper script
-    bin.write_exec_script (libexec/"spoctunnel/spoctunnel.sh"), bin/"spoctunnel"
+    bin.write_exec_script (bin/"spoctunnel.sh"), bin/"spoctunnel"
   end
 
 
