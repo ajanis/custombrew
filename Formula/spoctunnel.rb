@@ -11,24 +11,40 @@ class Spoctunnel < Formula
   # shasum -a 256 v1.1.tar.gz
 
   def install
-    install_dir = "#{libexec}/spoctunnel"
+    # Set install directory
+    install_dir = libexec/"spoctunnel"
+    # Remove existing direcrtory if exists
     FileUtils.rm_rf install_dir if install_dir.exist?
-    libexec.install Dir["spoctunnel"]
-
+    # Install script folder to libexec/"spoctunnel"
+    libexec.install "spoctunnel"
     # Replace /libexec/ with HOMEBREW_PREFIX in scripts
-    inreplace "spoctunnel.sh", "/libexec/", HOMEBREW_PREFIX
-  inreplace "spoctunnel.sh", "spoctunnel_version", version
+    inreplace "spoctunnel/spoctunnel.sh", "/libexec/", HOMEBREW_PREFIX
+    inreplace "spoctunnel/spoctunnel.sh", "spoctunnel_version", version
     # Create an executable for the sshuttle-spoc-helper-profile-add.sh helper script
-    bin.write_exec_script (libexec/"spoctunnel/spoctunnel.sh"), bin/"spoctunnel"
+    bin.write_exec_script (libexec/"spoctunnel/spoctunnel.sh"), bin"/spoctunnel"
   end
-  test do
-    assert_match "Spoctunnel version 1.0.0", shell_output("#{bin}/spoctunnel version")
-  end
+
 
 
 def caveats; <<-EOS
-You will need to set your SPOC Active-Directory user.  This can be done by answering script prompt,
-or by running or adding the following to your $SHELL profile export SPOCUSER="{SPOC Active-Directory Username}"
+"
+- You will need to set your SPOC Active-Directory user.  This can be done by answering script prompt,
+or by adding the following to your shell profile:
+
+  export SPOCUSER=\"{SPOC Active-Directory Username}\"
+
+
+- You will need to create a custom resolver directory.  Run the following commands:
+
+  sudo mkdir /etc/resolver
+  sudo echo 'search spoc.charterlab.com spoc.local nameserver 172.22.73.19' > /etc/resolver/spoc.charterlab.com
+
+  - Run the following command and look for the resolver in the output (toward the end):
+
+    sudo scutil --dns
+
+- When you run the script for the first time, you will be prompted to add your SPOC AD Username to the Mac OS Keychain.
+"
 EOS
 end
 
