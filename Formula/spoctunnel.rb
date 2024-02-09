@@ -1,9 +1,9 @@
 require 'formula'
 class Spoctunnel < Formula
-  homepage "https://github.com/ajanis/sshuttle-spoc-helper"
-  url "https://github.com/ajanis/sshuttle-spoc-helper/archive/v1.0.0.tar.gz"
-  version "1.0.0"
-  sha256 "6a49cf6648a89f83ee10ec369103bd3c939654d4"
+  homepage "https://github.com/ajanis/spoc-sshuttle-helper"
+  url "https://github.com/ajanis/spoc-sshuttle-helper/archive/v1.0.0.tar.gz"
+  version "1.0.1"
+  sha256 "5193f6949efce8b335958260f241b8a131969cd9fbddd1b8e2d13f0c65284d98"
 
   depends_on "sshuttle"
   depends_on "ajanis/custombrew/sshpass"
@@ -20,7 +20,7 @@ class Spoctunnel < Formula
     # Replace /libexec/ with HOMEBREW_PREFIX in scripts
     inreplace "spoctunnel/spoctunnel.sh", "/libexec/", HOMEBREW_PREFIX
     inreplace "spoctunnel/spoctunnel.sh", "spoctunnel_version", version
-    # Create an executable for the sshuttle-spoc-helper-profile-add.sh helper script
+    # Create an executable for the spoctunnel.sh helper script
     bin.write_exec_script (libexec/"spoctunnel/spoctunnel.sh"), bin"/spoctunnel"
   end
 
