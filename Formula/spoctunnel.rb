@@ -16,7 +16,7 @@ class Spoctunnel < Formula
     inreplace "bin/spoctunnel.sh", "spoctunnel_version", version
     # Install scripts"
     (etc/"spoctunnel").install Dir["etc/*.conf"]
-    Dir[etc/"spoctunnel"/*].each do |config_file|
+    Dir[etc/"spoctunnel/*"].each do |config_file|
       FileUtils.chmod 0644, config_file
     end
     bin.install "bin/spoctunnel.sh" => "spoctunnel"
