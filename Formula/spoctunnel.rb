@@ -14,11 +14,9 @@ class Spoctunnel < Formula
     # Replace /libexec/ with HOMEBREW_PREFIX in scripts
     inreplace "bin/spoctunnel.sh", "HOMEBREW_PREFIX", HOMEBREW_PREFIX
     inreplace "bin/spoctunnel.sh", "spoctunnel_version", version
-    # Install script folder to libexec/"spoctunnel"
+    # Install scripts"
     libexec.install Dir["libexec/*"]
-    bin.install "bin/spoctunnel.sh"
-    # Create an executable for the spoctunnel.sh helper script
-    bin.write_exec_script (bin/"spoctunnel.sh"), bin/"spoctunnel"
+    bin.install "bin/spoctunnel.sh" => "spoctunnel"
   end
 
 
