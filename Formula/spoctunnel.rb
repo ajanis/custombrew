@@ -16,11 +16,10 @@ class Spoctunnel < Formula
     inreplace "bin/spoctunnel.sh", "spoctunnel_version", version
     # Install scripts"
     (etc/"spoctunnel").install Dir["etc/*.conf"]
+    Dir[etc/"spoctunnel"/*].each do |config_file|
+      FileUtils.chmod 0644, config_file
+    end
     bin.install "bin/spoctunnel.sh" => "spoctunnel"
-  end
-
-  def post_install
-  chmod 0644, etc/"spoctunnel/*.conf"
   end
 
   test do
@@ -29,14 +28,10 @@ class Spoctunnel < Formula
   end
 
 def caveats; <<-EOS
-"
-- You will need to set your SPOC Active-Directory user.  This can be done by answering script prompt,
-or by adding the following to your shell profile:
+• You will need to set your SPOC Active-Directory user.  This can be done by answering script prompt, or by adding the following to your shell profile:
+export SPOCUSER=\"{SPOC Active-Directory Username}\"
 
-  export SPOCUSER=\"{SPOC Active-Directory Username}\"
-
-
-- You will need to create a custom resolver directory.  Run the following commands:
+• You will need to create a custom resolver directory.  Run the following commands:
 
   sudo mkdir /etc/resolver
   sudo echo 'search spoc.charterlab.com spoc.local nameserver 172.22.73.19' > /etc/resolver/spoc.charterlab.com
@@ -45,8 +40,7 @@ or by adding the following to your shell profile:
 
     sudo scutil --dns
 
-- When you run the script for the first time, you will be prompted to add your SPOC AD Username to the Mac OS Keychain.
-"
+• When you run the script for the first time, you will be prompted to add your SPOC AD Username to the Mac OS Keychain.
 EOS
 end
 
