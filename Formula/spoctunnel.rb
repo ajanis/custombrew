@@ -21,7 +21,7 @@ class Spoctunnel < Formula
     inreplace "spoctunnel/spoctunnel.sh", "/libexec/", HOMEBREW_PREFIX
     inreplace "spoctunnel/spoctunnel.sh", "spoctunnel_version", version
     # Create an executable for the spoctunnel.sh helper script
-    bin.write_exec_script (libexec/"spoctunnel/spoctunnel.sh"), bin"/spoctunnel"
+    bin.write_exec_script (libexec/"spoctunnel/spoctunnel.sh"), bin/"spoctunnel"
   end
 
 
