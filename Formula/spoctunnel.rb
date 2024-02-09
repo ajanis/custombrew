@@ -1,9 +1,9 @@
 require 'formula'
 class Spoctunnel < Formula
   homepage "https://github.com/ajanis/spoc-sshuttle-helper"
-  url "https://github.com/ajanis/spoc-sshuttle-helper/releases/download/v1.0.2/v1.0.2.tar.gz"
-  version "1.0.2"
-  sha256 "c477cde0ef39ab058dc09b75185ffae4c1cf1dd6a55147780461e89b4818e109"
+  url "https://github.com/ajanis/spoc-sshuttle-helper/releases/download/v1.0.3/v1.0.3.tar.gz"
+  version "1.0.3"
+  sha256 "8fc4a53cfc40a45165b98e0e61099d4437c4ee5568f7b0ff5fa59304aba06654"
 
   depends_on "sshuttle"
   depends_on "ajanis/custombrew/sshpass"
@@ -12,14 +12,21 @@ class Spoctunnel < Formula
 
   def install
     # Replace /libexec/ with HOMEBREW_PREFIX in scripts
-    inreplace "bin/spoctunnel.sh", "HOMEBREW_PREFIX", HOMEBREW_PREFIX
+    inreplace "bin/spoctunnel.sh", "HOMEBREW_ETC", etc/"spoctunnel"
     inreplace "bin/spoctunnel.sh", "spoctunnel_version", version
     # Install scripts"
-    libexec.install Dir["libexec/*"]
+    (etc/"spoctunnel").install Dir["etc/*.conf"]
     bin.install "bin/spoctunnel.sh" => "spoctunnel"
   end
 
+  def post_install
+  chmod 0644, etc/"spoctunnel/*.conf"
+  end
 
+  test do
+    # Example test to verify your tool's installation
+    system "#{bin}/spoctunnel", "--version"
+  end
 
 def caveats; <<-EOS
 "
