@@ -30,15 +30,15 @@ Installing the formula: ```ajanis/custombrew/sshpass``` points to the repository
 Currently there is 1 Formula available:
 
 - `sshpass`: A tool for non-interactive SSH login where a password is required
-  
+
 __NOTE: This is considered extremely insecure.  You should use SSH Keys whenever possible and otherwise, use interactive password login!!__
-  
+
   _This utility is for edge case laziness and (unless handled appropriately) will leave a cleartext password in your current terminal session and in your command history._
 
 ### Install Homebrew
 
 You will of course need to install [Homebrew](https://brew.sh), which you can quickly do with the following command:
-  
+
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
