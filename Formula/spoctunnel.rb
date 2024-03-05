@@ -35,10 +35,10 @@ class Spoctunnel < Formula
       EOS
     end
   end
-s
+
   test do
     # Example test to verify your tool's installation
-    system "#{bin}/spoctunnel", "--version"
+    system "#{bin}/spoctunnel", "version"
   end
 
 def caveats; <<-EOS
