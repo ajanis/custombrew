@@ -31,13 +31,11 @@ class Spoctunnel < Formula
     (etc/"newsyslog.d").mkpath
     File.open(etc/"newsyslog.d/spoctunnel.conf", "w") do |file|
       file.write <<~EOS
-        /usr/local/var/log/spoctunnel/spoctunnel.log
-        # logfilename [owner:group] mode count size when flags [/pid_file] [sig_num]
-        /usr/local/var/log/spoctunnel/spoctunnel.log #{ENV["USER"]}:admin 774 1 1024 * CZ
+        /usr/local/var/log/spoctunnel/spoctunnel.log  /usr/local/var/log/spoctunnel/spoctunnel.log #{ENV["USER"]}:admin 774 1 1024 * CZ
       EOS
     end
   end
-
+s
   test do
     # Example test to verify your tool's installation
     system "#{bin}/spoctunnel", "--version"
