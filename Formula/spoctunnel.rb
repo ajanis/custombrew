@@ -1,9 +1,9 @@
 require 'formula'
 class Spoctunnel < Formula
   homepage "https://github.com/ajanis/spoc-sshuttle-helper"
-  url "https://github.com/ajanis/spoc-sshuttle-helper/releases/download/v1.0.6/v1.0.6.tar.gz"
-  version "1.0.6"
-  sha256 "7442bf12fd6ad9a7a279f479e7d4e7bb704eadffffeb9b601700aeebf8bea9f0"
+  url "https://github.com/ajanis/spoc-sshuttle-helper/releases/download/v2.0.0/v2.0.0.tar.gz"
+  version "2.0.0"
+  sha256 "b0c21747a81b7f5e3adcbb37850261c9d6449e9a6bc8d33a3601d39f9c4d7e5d"
 
   depends_on "sshuttle"
   depends_on "ajanis/custombrew/sshpass"
@@ -13,6 +13,7 @@ class Spoctunnel < Formula
   def install
     # Replace /libexec/ with HOMEBREW_PREFIX in scripts
     inreplace "bin/spoctunnel.sh", "HOMEBREW_ETC", etc/"spoctunnel"
+    inreplace "bin/spoctunnel.sh", "HOMEBREW_VARLOG", var/log/"spoctunnel"
     inreplace "bin/spoctunnel.sh", "spoctunnel_version", version
     # Install scripts"
     (etc/"spoctunnel").install Dir["etc/*.conf"]
@@ -20,6 +21,21 @@ class Spoctunnel < Formula
       FileUtils.chmod 0644, config_file
     end
     bin.install "bin/spoctunnel.sh" => "spoctunnel"
+  end
+
+  def post_install
+    # Create the log directory
+    (var/"log/spoctunnel").mkpath
+
+    # Set up log rotation using newsyslog
+    (etc/"newsyslog.d").mkpath
+    File.open(etc/"newsyslog.d/spoctunnel.conf", "w") do |file|
+      file.write <<~EOS
+        /usr/local/var/log/spoctunnel/spoctunnel.log
+        # logfilename [owner:group] mode count size when flags [/pid_file] [sig_num]
+        /usr/local/var/log/spoctunnel/spoctunnel.log #{ENV["USER"]}:admin 774 1 1024 * CZ
+      EOS
+    end
   end
 
   test do
