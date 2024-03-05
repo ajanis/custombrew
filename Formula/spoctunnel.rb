@@ -31,7 +31,7 @@ class Spoctunnel < Formula
     (etc/"newsyslog.d").mkpath
     File.open(etc/"newsyslog.d/spoctunnel.conf", "w") do |file|
       file.write <<-EOS
-        /usr/local/var/log/spoctunnel/spoctunnel.log  /usr/local/var/log/spoctunnel/spoctunnel.log #{ENV["USER"]}:admin 774 1 1024 * CZ
+        /usr/local/var/log/spoctunnel/spoctunnel.log #{ENV["USER"]}:admin 774 1 1024 * CZ
       EOS
     end
   end
