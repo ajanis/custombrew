@@ -1,9 +1,9 @@
 require 'formula'
 class Spoctunnel < Formula
   homepage "https://github.com/ajanis/spoc-sshuttle-helper"
-  url "https://github.com/ajanis/spoc-sshuttle-helper/releases/download/v2.0.0/v2.0.0.tar.gz"
-  version "2.0.0"
-  sha256 "b0c21747a81b7f5e3adcbb37850261c9d6449e9a6bc8d33a3601d39f9c4d7e5d"
+  url "https://github.com/ajanis/spoc-sshuttle-helper/releases/download/v2.0.1/v2.0.1.tar.gz"
+  version "2.0.1"
+  sha256 "d7cef99672c9046e3dc71b810c7c29edb41057ce125632610dd13b95b71f74eb"
 
   depends_on "sshuttle"
   depends_on "ajanis/custombrew/sshpass"
@@ -25,13 +25,13 @@ class Spoctunnel < Formula
 
   def post_install
     # Create the log directory
-    (var/"log/spoctunnel").mkpath
+    (var/log/"spoctunnel").mkpath
 
     # Set up log rotation using newsyslog
     (etc/"newsyslog.d").mkpath
     File.open(etc/"newsyslog.d/spoctunnel.conf", "w") do |file|
       file.write <<-EOS
-        /usr/local/var/log/spoctunnel/spoctunnel.log #{ENV["USER"]}:admin 774 1 1024 * CZ
+        /usr/local/var/log/spoctunnel/spoctunnel.log #{ENV[USER]}:admin 774 1 1024 * CZ
       EOS
     end
   end
