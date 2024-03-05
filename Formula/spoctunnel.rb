@@ -13,7 +13,7 @@ class Spoctunnel < Formula
   def install
     # Replace /libexec/ with HOMEBREW_PREFIX in scripts
     inreplace "bin/spoctunnel.sh", "HOMEBREW_ETC", etc/"spoctunnel"
-    inreplace "bin/spoctunnel.sh", "HOMEBREW_VARLOG", var/log/"spoctunnel"
+    inreplace "bin/spoctunnel.sh", "HOMEBREW_VARLOG", var/"log/spoctunnel"
     inreplace "bin/spoctunnel.sh", "spoctunnel_version", version
     # Install scripts"
     (etc/"spoctunnel").install Dir["etc/*.conf"]
@@ -25,13 +25,13 @@ class Spoctunnel < Formula
 
   def post_install
     # Create the log directory
-    (var/log/"spoctunnel").mkpath
+    (var/"log/spoctunnel").mkpath
 
     # Set up log rotation using newsyslog
     (etc/"newsyslog.d").mkpath
     File.open(etc/"newsyslog.d/spoctunnel.conf", "w") do |file|
-      file.write <<-EOS
-        /usr/local/var/log/spoctunnel/spoctunnel.log #{ENV[USER]}:admin 774 1 1024 * CZ
+      file.write <<~EOS
+        /usr/local/var/log/spoctunnel/spoctunnel.log #{ENV["USER"]}:admin 774 1 1024 * CZ
       EOS
     end
   end
