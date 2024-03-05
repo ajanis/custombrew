@@ -54,7 +54,13 @@ def caveats; <<-EOS
 
   \033[33m> sudo scutil --dns
 
+\033[34m• You will need to create a link to the newsyslog rule that was created in order to activate log rotation and management.
+ Run the following command:
+
+    \033[33m> sudo ln -s /usr/local/etc/newsyslog.d/spoctunnel.conf /etc/newsyslog.d/
+
 \033[34m• When you run the script for the first time, you will be prompted to add your SPOC AD Username to the Mac OS Keychain.
+
 \033[30m
   EOS
 end
