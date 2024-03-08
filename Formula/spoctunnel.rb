@@ -24,6 +24,16 @@ class Spoctunnel < Formula
       FileUtils.chmod 0644, config_file
     end
 
+    # Create newsyslog.d directory and log rotation rule in the homebrew prefix
+    (etc/"newsyslog.d").mkpath
+    (etc/"newsyslog.d").install "etc/newsyslog/spoctunnel.conf"
+    (etc/"newsyslog.d/spoctunnel.conf").chmod 0644
+
+    # Create the custom resolver directory and config file in the homebrew prefix
+    (etc/"resolver").mkpath
+    (etc/"resolver/spoc.charterlab.com").install "etc/resolver/spoc.charterlab.com"
+    (etc/"resolver/spoc.charterlab.com").chmod 0644
+
     # Install script and bin alias
     bin.install "bin/spoctunnel.sh" => "spoctunnel"
   end
@@ -33,15 +43,7 @@ class Spoctunnel < Formula
     (var/"log/spoctunnel").mkpath
     (var/"log/spoctunnel").chmod 0774
 
-    # Create newsyslog.d directory and log rotation rule in the homebrew prefix
-    (etc/"newsyslog.d").mkpath
-    (etc/"newsyslog.d").install Dir["etc/newsyslog/*.conf"]
-    (etc/"newsyslog.d/spoctunnel.conf").chmod 0644
 
-    # Create the custom resolver directory and config file in the homebrew prefix
-    (etc/"resolver").mkpath
-    (etc/"resolver/spoc.charterlab.com").install Dir["etc/resolver/*"]
-    (etc/"resolver/spoc.charterlab.com").chmod 0644
   end
 
   test do
