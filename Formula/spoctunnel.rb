@@ -31,7 +31,7 @@ class Spoctunnel < Formula
 
     # Create the custom resolver directory and config file in the homebrew prefix
     (etc/"resolver").mkpath
-    (etc/"resolver/spoc.charterlab.com").install "etc/resolver/spoc.charterlab.com"
+    (etc/"resolver").install "etc/resolver/spoc.charterlab.com"
     (etc/"resolver/spoc.charterlab.com").chmod 0644
 
     # Install script and bin alias
