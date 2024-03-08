@@ -52,25 +52,27 @@ class Spoctunnel < Formula
   end
 
 def caveats; <<-EOS
-\033[34m 1) You will need to set your SPOC Active-Directory user.  This can be done by answering script prompt each time you run the script, or by adding the following to your shell profile (RECOMMENDED):
-  \033[33m> export SPOCUSER=\"<Your SPOC Active-Directory Username>\"
-
-\033[34m 2) Create a link to the custom resolver file installed by the Formula:
-
-  \033[33m> sudo ln -s $(brew --prefix)/etc/resolver /etc/resolver
-
-    \033[34m- Run the following command and look for the resolver in the output (toward the end):
-
-      \033[33m> sudo scutil --dns
-
-\033[34m 3) Create a link to the custom newsyslog log rotation rule installed by the Formula:
-
-    \033[33m> sudo ln -s $(brew --prefix)/etc/newsyslog.d/spoctunnel.conf /etc/newsyslog.d/spoctunnel.conf
-
-\033[34m 4) When you run the script for the first time, you will be prompted to add your SPOC AD Username to the Mac OS Keychain.
-            This password will be retrieved automatically when you run spoctunnel in the future.
-
-\033[30m
+  \033[34m
+  1) You will need to set your SPOC Active-Directory user.
+     This can be done by answering script prompt each time you run the script, or by adding the following to your shell profile (RECOMMENDED):
+     \033[33m
+     > export SPOCUSER=\"<Your SPOC Active-Directory Username>\"
+  \033[34m
+  2) Create a link to the custom resolver file installed by the Formula:
+     \033[33m
+     > sudo ln -s $(brew --prefix)/etc/resolver /etc/resolver
+       \033[34m
+       - Run the following command and look for the resolver in the output (toward the end):
+         \033[33m
+         > sudo scutil --dns
+  \033[34m
+  3) Create a link to the custom newsyslog log rotation rule installed by the Formula:
+     \033[33m
+     > sudo ln -s $(brew --prefix)/etc/newsyslog.d/spoctunnel.conf /etc/newsyslog.d/spoctunnel.conf
+  \033[34m
+  4) When you run the script for the first time, you will be prompted to add your SPOC AD Username to the Mac OS Keychain.
+     This password will be retrieved automatically when you run spoctunnel in the future.
+  \033[30m
   EOS
 end
 
