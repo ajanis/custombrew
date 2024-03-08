@@ -1,9 +1,9 @@
 require 'formula'
 class Spoctunnel < Formula
   homepage "https://github.com/ajanis/spoc-sshuttle-helper"
-  url "https://github.com/ajanis/spoc-sshuttle-helper/releases/download/v2.0.1/v2.0.1.tar.gz"
-  version "2.0.1"
-  sha256 "d7cef99672c9046e3dc71b810c7c29edb41057ce125632610dd13b95b71f74eb"
+  url "https://github.com/ajanis/spoc-sshuttle-helper/releases/download/v3.0.0/v3.0.0.tar.gz"
+  version "3.0.0"
+  sha256 "76874ed5865d217295239b24623610ab6d2b47dbe89790f0eb7d2d2bfe94c5f7"
 
   depends_on "sshuttle"
   depends_on "ajanis/custombrew/sshpass"
@@ -15,25 +15,33 @@ class Spoctunnel < Formula
     inreplace "bin/spoctunnel.sh", "HOMEBREW_ETC", etc/"spoctunnel"
     inreplace "bin/spoctunnel.sh", "HOMEBREW_VARLOG", var/"log/spoctunnel"
     inreplace "bin/spoctunnel.sh", "spoctunnel_version", version
-    # Install scripts"
-    (etc/"spoctunnel").install Dir["etc/*.conf"]
+    inreplace "etc/newsyslog/spoctunnel.conf", "HOMEBREW_VARLOG",  var/"log/newsyslog.d"
+    inreplace "etc/newsyslog/spoctunnel.conf", "HOMEBREW_LOCALUSER",  ENV["USER"]
+
+    # Install allow/deny files"
+    (etc/"spoctunnel").install Dir["etc/spoctunnel/*.conf"]
     Dir[etc/"spoctunnel/*"].each do |config_file|
       FileUtils.chmod 0644, config_file
     end
+
+    # Install script and bin alias
     bin.install "bin/spoctunnel.sh" => "spoctunnel"
   end
 
   def post_install
-    # Create the log directory
+    # Create the log directory in the homebrew prefix
     (var/"log/spoctunnel").mkpath
+    (var/"log/spoctunnel").chmod 0774
 
-    # Set up log rotation using newsyslog
+    # Create newsyslog.d directory and log rotation rule in the homebrew prefix
     (etc/"newsyslog.d").mkpath
-    File.open(etc/"newsyslog.d/spoctunnel.conf", "w") do |file|
-      file.write <<~EOS
-        /usr/local/var/log/spoctunnel/spoctunnel.log #{ENV["USER"]}:admin 774 1 1024 * CZ
-      EOS
-    end
+    (etc/"newsyslog.d").install "etc/newsyslog/spoctunnel.conf"
+    (etc/"newsyslog.d/spoctunnel.conf").chmod 0644
+
+    # Create the custom resolver directory and config file in the homebrew prefix
+    (etc/"resolver").mkpath
+    (etc/"resolver/spoc.charterlab.com").install "etc/resolver/spoc.charterlab.com"
+    (etc/"resolver/spoc.charterlab.com").chmod 0644
   end
 
   test do
@@ -42,24 +50,23 @@ class Spoctunnel < Formula
   end
 
 def caveats; <<-EOS
-\033[34m• You will need to set your SPOC Active-Directory user.  This can be done by answering script prompt, or by adding the following to your shell profile:
-  \033[33m> export SPOCUSER=\"{SPOC Active-Directory Username}\"
+\033[34m 1) You will need to set your SPOC Active-Directory user.  This can be done by answering script prompt each time you run the script, or by adding the following to your shell profile (RECOMMENDED):
+  \033[33m> export SPOCUSER=\"<Your SPOC Active-Directory Username>\"
 
-\033[34m• You will need to create a custom resolver directory.  Run the following commands:
+\033[34m 2) Create a link to the custom resolver file installed by the Formula:
 
-  \033[33m> sudo mkdir /etc/resolver
-  \033[33m> sudo echo 'search spoc.charterlab.com spoc.local nameserver 172.22.73.19' > /etc/resolver/spoc.charterlab.com
+  \033[33m> sudo ln -s $(brew --prefix)/etc/resolver /etc/resolver
 
-\033[34m- Run the following command and look for the resolver in the output (toward the end):
+    \033[34m- Run the following command and look for the resolver in the output (toward the end):
 
-  \033[33m> sudo scutil --dns
+      \033[33m> sudo scutil --dns
 
-\033[34m• You will need to create a link to the newsyslog rule that was created in order to activate log rotation and management.
- Run the following command:
+\033[34m 3) Create a link to the custom newsyslog log rotation rule installed by the Formula:
 
-    \033[33m> sudo ln -s /usr/local/etc/newsyslog.d/spoctunnel.conf /etc/newsyslog.d/
+    \033[33m> sudo ln -s $(brew --prefix)/etc/newsyslog.d/spoctunnel.conf /etc/newsyslog.d/spoctunnel.conf
 
-\033[34m• When you run the script for the first time, you will be prompted to add your SPOC AD Username to the Mac OS Keychain.
+\033[34m 4) When you run the script for the first time, you will be prompted to add your SPOC AD Username to the Mac OS Keychain.
+            This password will be retrieved automatically when you run spoctunnel in the future.
 
 \033[30m
   EOS
