@@ -15,7 +15,7 @@ class Spoctunnel < Formula
     inreplace "bin/spoctunnel.sh", "HOMEBREW_ETC", etc/"spoctunnel"
     inreplace "bin/spoctunnel.sh", "HOMEBREW_VARLOG", var/"log/spoctunnel"
     inreplace "bin/spoctunnel.sh", "spoctunnel_version", version
-    inreplace "etc/newsyslog/spoctunnel.conf", "HOMEBREW_VARLOG",  var/"log/newsyslog.d"
+    inreplace "etc/newsyslog/spoctunnel.conf", "HOMEBREW_VARLOG",  var/"log/spoctunnel"
     inreplace "etc/newsyslog/spoctunnel.conf", "HOMEBREW_LOCALUSER",  ENV["USER"]
 
     # Install allow/deny files"
@@ -35,12 +35,12 @@ class Spoctunnel < Formula
 
     # Create newsyslog.d directory and log rotation rule in the homebrew prefix
     (etc/"newsyslog.d").mkpath
-    (etc/"newsyslog.d").install "etc/newsyslog/spoctunnel.conf"
+    (etc/"newsyslog.d").install Dir["etc/newsyslog/*.conf"]
     (etc/"newsyslog.d/spoctunnel.conf").chmod 0644
 
     # Create the custom resolver directory and config file in the homebrew prefix
     (etc/"resolver").mkpath
-    (etc/"resolver/spoc.charterlab.com").install "etc/resolver/spoc.charterlab.com"
+    (etc/"resolver/spoc.charterlab.com").install Dir["etc/resolver/*"]
     (etc/"resolver/spoc.charterlab.com").chmod 0644
   end
 
