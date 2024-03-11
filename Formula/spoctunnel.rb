@@ -53,4 +53,6 @@ class Spoctunnel < Formula
 
   def caveats
     system "#{bin}/spoctunnel", "postinstall"
+  end
+
 end
