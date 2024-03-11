@@ -42,7 +42,7 @@ class Spoctunnel < Formula
     (var/"log/spoctunnel").chmod 0744
     (etc/"newsyslog.d/spoctunnel.conf").chmod 0744
     (etc/"resolver/spoc.charterlab.com").chmod 0744
-    puts `"#{bin}/spoctunnel version`
+    puts `"#{bin}/spoctunnel version"`
   end
 
   def test
