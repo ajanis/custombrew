@@ -46,9 +46,11 @@ class Spoctunnel < Formula
 
   end
 
-  test do
+  def test
     # Example test to verify your tool's installation
     system "#{bin}/spoctunnel", "version"
   end
 
+  def caveats
+    system "#{bin}/spoctunnel", "postinstall"
 end
