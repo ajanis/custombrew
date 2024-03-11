@@ -1,9 +1,9 @@
 require 'formula'
 class Spoctunnel < Formula
   homepage "https://github.com/ajanis/spoc-sshuttle-helper"
-  url "https://github.com/ajanis/spoc-sshuttle-helper/releases/download/v3.0.2/v3.0.2.tar.gz"
-  version "3.0.2"
-  sha256 "f18ea25226ed404f7ef67c3c0c9525fa08ad41b32a1d80585dba910a5a87c34a"
+  url "https://github.com/ajanis/spoc-sshuttle-helper/releases/download/v3.0.3/v3.0.3.tar.gz"
+  version "3.0.3"
+  sha256 "65f51b5dc11ad666848c71cf893ea3e4cb497549e7fd811bda0b3e700fbba928"
 
   depends_on "sshuttle"
   depends_on "ajanis/custombrew/sshpass"
@@ -14,7 +14,7 @@ class Spoctunnel < Formula
     # Replace /libexec/ with HOMEBREW_PREFIX in scripts
     inreplace "bin/spoctunnel.sh", "HOMEBREW_ETC", etc/"spoctunnel"
     inreplace "bin/spoctunnel.sh", "HOMEBREW_VARLOG", var/"log/spoctunnel"
-    inreplace "bin/spoctunnel.sh", "spoctunnel_version", version
+    inreplace "bin/spoctunnel.sh", "SPOCTUNNEL_VERSION", version
     inreplace "etc/newsyslog/spoctunnel.conf", "HOMEBREW_VARLOG",  var/"log/spoctunnel"
     inreplace "etc/newsyslog/spoctunnel.conf", "HOMEBREW_LOCALUSER",  ENV["USER"]
 
