@@ -1,4 +1,5 @@
 require 'formula'
+require 'open3'
 class Spoctunnel < Formula
   homepage "https://github.com/ajanis/spoc-sshuttle-helper"
   url "https://github.com/ajanis/spoc-sshuttle-helper/releases/download/v3.0.3/v3.0.3.tar.gz"
@@ -42,7 +43,8 @@ class Spoctunnel < Formula
     (var/"log/spoctunnel").chmod 0744
     (etc/"newsyslog.d/spoctunnel.conf").chmod 0744
     (etc/"resolver/spoc.charterlab.com").chmod 0744
-    puts `"#{bin}/spoctunnel version"`
+    test_cmd = Open3.capture3("#{bin}/spoctunnel", "postinstall")
+    puts test_cmd
   end
 
   def test
