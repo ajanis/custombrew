@@ -128,7 +128,7 @@ Pushing Repository Tag : v${newVersion}"
 git push --tags
 xc "${lB}
 Publishing Git Release : v${newVersion}"
-gh release create \'"v${newVersion}"\' -F \'"${tarPath}"\'
+gh release create v"${newVersion}" -F "${tarPath}"
 
 cd ..
 
