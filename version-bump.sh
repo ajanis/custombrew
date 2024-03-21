@@ -112,7 +112,7 @@ git checkout -q -f
 xc "${lB}
 Tagging Git repository...
 ${lW}"
-git tag -q -a "v${newVersion}" -m "${versionLevel} revision : v${newVersion}"
+git -q tag -a "v${newVersion}" -m "${versionLevel} revision : v${newVersion}"
 xc "${lB}Pushing Repository and Tags...
 ${lW}"
 git push --all
