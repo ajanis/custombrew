@@ -121,27 +121,35 @@ xc "${lG}
 SHA256 Sum of ${tarFile} : $archiveSHA
 "
 xc "${lB}
-Tagging Git repository : v${newVersion}"
+Tagging Git repository : v${newVersion}
+${lW}"
 git tag -a "v${newVersion}" -m "${versionLevel} revision : v${newVersion}"
 xc "${lB}
-Pushing Repository Tag : v${newVersion}"
-
+Pushing Repository Tag : v${newVersion}
+${lW}"
 git push --tags
 xc "${lB}
-Publishing Git Release : v${newVersion}"
-
+Publishing Git Release : v${newVersion}
+${lW}"
 gh release create v"${newVersion}" -F "${tarPath}"
-
 cd ..
 
-xc "${lB}Updating version v${curVersion} to v${newVersion} in ${formulaFile}"
+xc "${lB}
+Updating version v${curVersion} to v${newVersion} in ${formulaFile}
+${lW}"
 sed -i '' "s/$curVersion/$newVersion/g" "${formulaFile}"
 
-xc "${lB}Updating SHA256 Sum in ${formulaFile}"
+xc "${lB}
+Updating SHA256 Sum in ${formulaFile}
+${lW}"
 sed -i '' -E "/sha256/s/^(.+sha256).*$/\1 \"${archiveSHA}\"/" "${formulaFile}"
 
-xc "${lB}Updating Homebrew Repository"
+xc "${lB}
+Updating Homebrew Repository..
+${lW}"
 git commit -am "Updating ${formulaName} to version v${newVersion}"
 git push --all
 
-xc "${lG}Done"
+xc "${lG}
+Done
+${lW}"
