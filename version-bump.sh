@@ -104,7 +104,6 @@ Previous Version: ${curVersion}
 New Version: ${newVersion}
 "
 cd "${formulaName}" || exit
-echo "DIR $PWD"
 git checkout -f
 mkdir -p archive
 tarFile="v${newVersion}.tar.gz"
@@ -113,7 +112,6 @@ export tarFile="${tarFile}"
 export tarPath="${tarPath}"
 xc "${lB} Creating archive :  ${tarPath}"
 tar -czf "${tarPath}" "${formulaName}"
-echo "DIR $PWD"
 archiveSHA=$(shasum -a 256 "${tarPath}" | awk '{print $1}')
 export archiveSHA="${archiveSHA}"
 # cd ..
@@ -122,46 +120,28 @@ export archiveSHA="${archiveSHA}"
 xc "${lG}
 SHA256 Sum of ${tarFile} : $archiveSHA
 "
-echo "DIR $PWD"
 xc "${lB}
 Tagging Git repository : v${newVersion}"
 git tag -a "v${newVersion}" -m "${versionLevel} revision : v${newVersion}"
 xc "${lB}
 Pushing Repository Tag : v${newVersion}"
-echo "DIR $PWD"
 
 git push --tags
 xc "${lB}
 Publishing Git Release : v${newVersion}"
-echo "DIR $PWD"
 
 gh release create v"${newVersion}" -F "${tarPath}"
 
 cd ..
 
-echo "DIR $PWD"
-
 xc "${lB}Updating version v${curVersion} to v${newVersion} in ${formulaFile}"
 sed -i '' "s/$curVersion/$newVersion/g" "${formulaFile}"
-echo "DIR $PWD"
 
 xc "${lB}Updating SHA256 Sum in ${formulaFile}"
 sed -i '' -E "/sha256/s/^(.+sha256).*$/\1 \"${archiveSHA}\"/" "${formulaFile}"
-echo "DIR $PWD"
 
 xc "${lB}Updating Homebrew Repository"
 git commit -am "Updating ${formulaName} to version v${newVersion}"
 git push --all
-echo "DIR $PWD"
-
-# xc "${lB}
-# Tagging Git repository : v${newVersion}"
-# git tag -a "v${newVersion}" -m "${versionLevel}" revision : "v${newVersion}"
-# xc "${lB}
-# Pushing Repository Tag : v${newVersion}"
-# git push --tags
-# xc "${lB}
-# Publishing Git Release : v${newVersion}"
-# gh release create \'"v${newVersion}"\' -F \'"${formulaName}/${tarPath}"\'
 
 xc "${lG}Done"
