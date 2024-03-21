@@ -1,0 +1,3 @@
+[submodule "spoctunnel"]
+	path = spoctunnel
+	url = https://github.com/ajanis/spoc-sshuttle-helper.git
