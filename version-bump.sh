@@ -62,7 +62,7 @@ Incrementing version for $formulaName ...
 ${lW}"
 
 # Match version string in selected Formula file
-curVersion="$(git describe --tags --abbrev=0 | tr -d 'v')"
+curVersion="$(git -C "${formulaName}" describe --tags --abbrev=0 | tr -d 'v')"
 # curVersion=$(sed -E -n '/version/s/^.+([0-9]\.[0-9]\.[0-9]).+$/\1/p' "${formulaFile}")
 export curVersion="${curVersion}"
 # Create an array of 'release bits' from the detected version using '.' as the delimiter
