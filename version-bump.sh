@@ -109,7 +109,8 @@ xc "${lB}Tag and Push ${formulaName} repository
 ${lW}"
 git commit -am "Ensuring Commit..."
 git checkout -f
-xc "${lB}Tagging Git repository...
+xc "${lB}
+Tagging Git repository...
 ${lW}"
 git tag -a "v${newVersion}" -m "${versionLevel} revision : v${newVersion}"
 xc "${lB}Pushing Repository and Tags...
@@ -117,7 +118,8 @@ ${lW}"
 git push --all
 git push --tags -f
 
-xc "${LB}Preparing Release...
+xc "${LB}
+Preparing Release...
 ${LW}"
 mkdir -p archive
 tarFile="v${newVersion}.tar.gz"
@@ -138,7 +140,8 @@ ${lW}"
 gh release create v"${newVersion}" -F "${tarPath}"
 cd ..
 
-xc "${lB}Updating version v${curVersion} to v${newVersion} in ${formulaFile}
+xc "${lB}
+Updating version v${curVersion} to v${newVersion} in ${formulaFile}
 ${lW}"
 sed -i '' "s/$curVersion/$newVersion/g" "${formulaFile}"
 
@@ -151,5 +154,6 @@ ${lW}"
 git commit -am "Updating ${formulaName} to version v${newVersion}"
 git push --all
 
-xc "${lG}Done
+xc "${lG}
+Done
 ${lW}"
