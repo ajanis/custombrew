@@ -107,12 +107,12 @@ New Version: ${newVersion}
 cd "${formulaName}" || exit
 xc "${lB}Tag and Push ${formulaName} repository
 ${lW}"
-git commit -am "Ensuring Commit..."
-git checkout -f
+git commit -q -am "Ensuring Commit..."
+git checkout -q -f
 xc "${lB}
 Tagging Git repository...
 ${lW}"
-git tag -a "v${newVersion}" -m "${versionLevel} revision : v${newVersion}"
+git tag -q -a "v${newVersion}" -m "${versionLevel} revision : v${newVersion}"
 xc "${lB}Pushing Repository and Tags...
 ${lW}"
 git push --all
@@ -151,8 +151,8 @@ sed -i '' -E "/sha256/s/^(.+sha256).*$/\1 \"${archiveSHA}\"/" "${formulaFile}"
 
 xc "${lB}Commit and push changes to Tap repository
 ${lW}"
-git commit -am "Updating ${formulaName} to version v${newVersion}"
-git push --all
+git commit -q -am "Updating ${formulaName} to version v${newVersion}"
+git push --all -q
 
 xc "${lG}
 Done

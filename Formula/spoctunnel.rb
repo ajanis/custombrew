@@ -4,7 +4,7 @@ class Spoctunnel < Formula
   version "5.6.10"
   homepage "https://github.com/ajanis/spoc-sshuttle-helper"
   url "https://github.com/ajanis/spoc-sshuttle-helper/releases/download/v"version"/v"version".tar.gz"
-  sha256 "338d6dd18a3a352d9e0b1429021b6614e3c42c2d5ff52b2d8c63a23d74eca574"
+  sha256 "69d2969b1bda0f7dc1c516a808738751a9f913c160deebb2036890924d4ac6db"
 
   depends_on "sshuttle"
   depends_on "ajanis/custombrew/sshpass"
