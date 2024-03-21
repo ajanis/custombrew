@@ -116,7 +116,8 @@ git tag -a "v${newVersion}" -m "${versionLevel} revision : v${newVersion}"
 xc "${lB}
 Pushing Repository Tag : v${newVersion}
 ${lW}"
-git push --all --tags
+git push --all
+git push --tags -f
 
 xc "${LB}
 Create Archive...
