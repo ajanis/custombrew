@@ -81,14 +81,17 @@ case $versionChoice in
 major | 1)
     export versionLevel="major"
     ((versionBits[0]++))
+    newVersion="${versionBits[0]}.0.0"
     ;;
 minor | 2)
     export versionLevel="minor"
     ((versionBits[1]++))
+    newVersion="${versionBits[0]}.${versionBits[1]}.0"
     ;;
 patch | 3)
     export versionLevel="patch"
     ((versionBits[2]++))
+    newVersion="${versionBits[0]}.${versionBits[1]}.${versionBits[2]}"
     ;;
 *)
     versionReadme
@@ -96,7 +99,6 @@ patch | 3)
 esac
 
 # Reassemble the version string
-newVersion="${versionBits[0]}.${versionBits[1]}.${versionBits[2]}"
 export newVersion="${newVersion}"
 
 xc "${lG}
