@@ -139,7 +139,7 @@ xc "${lG}SHA256 Sum of ${tarFile} : $archiveSHA
 ${lW}"
 xc "${lB}Publishing Git Release : v${newVersion}
 ${lW}"
-gh release create v"${newVersion}" -F "${tarPath}"
+gh release create v"${newVersion}" --generate-notes "${tarPath}"
 cd ..
 
 xc "${lB}
