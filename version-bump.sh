@@ -114,7 +114,6 @@ xc "${lB} Creating archive :  ${tarPath}"
 tar -czf "${tarPath}" "${formulaName}"
 archiveSHA=$(shasum -a 256 "${tarPath}" | awk '{print $1}')
 export archiveSHA="${archiveSHA}"
-# cd ..
 
 # Compare the previous and new version strings
 xc "${lG}
@@ -127,7 +126,7 @@ git tag -a "v${newVersion}" -m "${versionLevel} revision : v${newVersion}"
 xc "${lB}
 Pushing Repository Tag : v${newVersion}
 ${lW}"
-git push --tags
+git push --all --tags
 xc "${lB}
 Publishing Git Release : v${newVersion}
 ${lW}"
