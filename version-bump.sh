@@ -104,13 +104,31 @@ Previous Version: ${curVersion}
 New Version: ${newVersion}
 "
 cd "${formulaName}" || exit
+xc "${lB}
+Commit and push changes...
+${lW}"
+git commit -am "Ensuring Commit..."
 git checkout -f
+xc "${lB}
+Tagging Git repository : v${newVersion}
+${lW}"
+git tag -a "v${newVersion}" -m "${versionLevel} revision : v${newVersion}"
+xc "${lB}
+Pushing Repository Tag : v${newVersion}
+${lW}"
+git push --all --tags
+
+xc "${LB}
+Create Archive...
+${LW}"
 mkdir -p archive
 tarFile="v${newVersion}.tar.gz"
 tarPath="archive/${tarFile}"
 export tarFile="${tarFile}"
 export tarPath="${tarPath}"
-xc "${lB} Creating archive :  ${tarPath}"
+xc "${lB}
+Creating ${tarPath}
+${LW}"
 tar -czf "${tarPath}" "${formulaName}"
 archiveSHA=$(shasum -a 256 "${tarPath}" | awk '{print $1}')
 export archiveSHA="${archiveSHA}"
