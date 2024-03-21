@@ -99,6 +99,10 @@ esac
 newVersion="${versionBits[0]}.${versionBits[1]}.${versionBits[2]}"
 export newVersion="${newVersion}"
 
+xc "${lG}
+Previous Version: ${curVersion}
+New Version: ${newVersion}
+"
 cd "${formulaName}" || exit
 mkdir -p archive
 tarFile="v${newVersion}.tar.gz"
@@ -113,20 +117,18 @@ export archiveSHA="${archiveSHA}"
 
 # Compare the previous and new version strings
 xc "${lG}
-Previous Version: ${curVersion}
-New Version: ${newVersion}
 SHA256 Sum of ${tarFile} : $archiveSHA
 "
 
 xc "${lB}
 Tagging Git repository : v${newVersion}"
-git tag -a "v${newVersion}" -m "${versionLevel}" revision : "v${newVersion}"
+git tag -a "v${newVersion}" -m "${versionLevel} revision : v${newVersion}"
 xc "${lB}
 Pushing Repository Tag : v${newVersion}"
 git push --tags
 xc "${lB}
 Publishing Git Release : v${newVersion}"
-gh release create \'"v${newVersion}"\' -F \'"${formulaName}/${tarPath}"\'
+gh release create \'"v${newVersion}"\' -F \'"${tarPath}"\'
 
 cd ..
 
@@ -138,6 +140,7 @@ sed -i '' -E "/sha256/s/^(.+sha256).*$/\1 \"${archiveSHA}\"/" "${formulaFile}"
 
 xc "${lB}Updating Homebrew Repository"
 git commit -am "Updating ${formulaName} to version v${newVersion}"
+git push --all
 
 # xc "${lB}
 # Tagging Git repository : v${newVersion}"
