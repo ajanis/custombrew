@@ -105,40 +105,51 @@ New Version: ${newVersion}
 "
 
 cd "${formulaName}" || exit
-xc "${lB}Tag and Push ${formulaName} repository${lW}"
+xc "${lB}Tag and Push ${formulaName} repository
+${lW}"
 git commit -am "Ensuring Commit..."
 git checkout -f
-xc "${lB}Tagging Git repository...${lW}"
+xc "${lB}Tagging Git repository...
+${lW}"
 git tag -a "v${newVersion}" -m "${versionLevel} revision : v${newVersion}"
-xc "${lB}Pushing Repository and Tags...${lW}"
+xc "${lB}Pushing Repository and Tags...
+${lW}"
 git push --all
 git push --tags -f
 
-xc "${LB}Create Archive...${LW}"
+xc "${LB}Preparing Release...
+${LW}"
 mkdir -p archive
 tarFile="v${newVersion}.tar.gz"
 tarPath="archive/${tarFile}"
 export tarFile="${tarFile}"
 export tarPath="${tarPath}"
-xc "${lB}Creating ${tarPath}${LW}"
+xc "${lB}Creating Archive: ${tarPath}
+${LW}"
 tar -czf "${tarPath}" "${formulaName}"
 archiveSHA=$(shasum -a 256 "${tarPath}" | awk '{print $1}')
 export archiveSHA="${archiveSHA}"
 
-# Compare the previous and new version strings
-xc "${lG}SHA256 Sum of ${tarFile} : $archiveSHA${lW}"
-xc "${lB}Publishing Git Release : v${newVersion}${lW}"
+# Display SHA256 Sum, Previous Version and New Version
+xc "${lG}SHA256 Sum of ${tarFile} : $archiveSHA
+${lW}"
+xc "${lB}Publishing Git Release : v${newVersion}
+${lW}"
 gh release create v"${newVersion}" -F "${tarPath}"
 cd ..
 
-xc "${lB}Updating version v${curVersion} to v${newVersion} in ${formulaFile}${lW}"
+xc "${lB}Updating version v${curVersion} to v${newVersion} in ${formulaFile}
+${lW}"
 sed -i '' "s/$curVersion/$newVersion/g" "${formulaFile}"
 
-xc "${lB}Updating SHA256 Sum in ${formulaFile}${lW}"
+xc "${lB}Updating SHA256 Sum in ${formulaFile}
+${lW}"
 sed -i '' -E "/sha256/s/^(.+sha256).*$/\1 \"${archiveSHA}\"/" "${formulaFile}"
 
-xc "${lB}Commit and push changes to Tap repository${lW}"
+xc "${lB}Commit and push changes to Tap repository
+${lW}"
 git commit -am "Updating ${formulaName} to version v${newVersion}"
 git push --all
 
-xc "${lG}Done${lW}"
+xc "${lG}Done
+${lW}"
