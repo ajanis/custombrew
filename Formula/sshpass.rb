@@ -2,9 +2,9 @@ require 'formula'
 
 class Sshpass < Formula
   version "1.0.6"
-  url 'http://sourceforge.net/projects/sshpass/files/sshpass/'version'/sshpass-'version'.tar.gz'
-  homepage 'http://sourceforge.net/projects/sshpass'
-  sha256 'c6324fcee608b99a58f9870157dfa754837f8c48be3df0f5e2f3accf145dee60'
+  homepage "https://github.com/ajanis/sshpass"
+  url "https://github.com/ajanis/sshpass/releases/download/v1.0.6/v1.0.6.tar.gz"
+  sha256 "011206b77e07abce0b61f697d91b8bbd1e516ae41a2c0f4e74d2e4ee4a033aca"
 
   def install
     system "./configure", "--disable-debug", "--disable-dependency-tracking",
