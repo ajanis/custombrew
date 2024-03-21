@@ -105,6 +105,7 @@ New Version: ${newVersion}
 "
 cd "${formulaName}" || exit
 echo "DIR $PWD"
+git checkout -f
 mkdir -p archive
 tarFile="v${newVersion}.tar.gz"
 tarPath="archive/${tarFile}"
