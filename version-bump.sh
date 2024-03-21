@@ -103,6 +103,7 @@ xc "${lG}
 Previous Version: ${curVersion}
 New Version: ${newVersion}
 "
+
 cd "${formulaName}" || exit
 xc "${lB}
 Commit and push changes...
@@ -138,14 +139,6 @@ export archiveSHA="${archiveSHA}"
 xc "${lG}
 SHA256 Sum of ${tarFile} : $archiveSHA
 "
-xc "${lB}
-Tagging Git repository : v${newVersion}
-${lW}"
-git tag -a "v${newVersion}" -m "${versionLevel} revision : v${newVersion}"
-xc "${lB}
-Pushing Repository Tag : v${newVersion}
-${lW}"
-git push --all --tags
 xc "${lB}
 Publishing Git Release : v${newVersion}
 ${lW}"
