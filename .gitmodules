@@ -1,0 +1,6 @@
+[submodule "sshpass"]
+	path = sshpass
+	url = https://github.com/ajanis/sshpass.git
+[submodule "spoctunnel"]
+	path = spoctunnel
+	url = https://github.com/ajanis/spoctunnel.git
