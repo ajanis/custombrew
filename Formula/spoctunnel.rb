@@ -2,8 +2,8 @@ require 'formula'
 require 'open3'
 class Spoctunnel < Formula
   version "7.1.1"
-  homepage "https://github.com/ajanis/spoc-sshuttle-helper"
-  url "https://github.com/ajanis/spoc-sshuttle-helper/releases/download/v7.1.1/v7.1.1.tar.gz"
+  homepage "https://github.com/ajanis/spoctunnel"
+  url "https://github.com/ajanis/spoctunnel/releases/download/v7.1.1/v7.1.1.tar.gz"
   sha256 "5caa6b7e4540967726238c9a722688146e835b209ba0c8d0602a4dd7d6e22a0f"
 
   depends_on "sshuttle"
