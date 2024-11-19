@@ -15,6 +15,7 @@ class Spoctunnel < Formula
     # Replace /libexec/ with HOMEBREW_PREFIX in scripts
     inreplace "bin/spoctunnel.sh", "HOMEBREW_ETC", etc/"spoctunnel"
     inreplace "bin/spoctunnel.sh", "HOMEBREW_VARLOG", var/"log/spoctunnel"
+    inreplace "bin/spoctunnel.sh", "HOMEBREW_VARRUN", var/"run/spoctunnel"
     inreplace "bin/spoctunnel.sh", "SPOCTUNNEL_VERSION", version
     inreplace "etc/newsyslog/spoctunnel.conf", "HOMEBREW_VARLOG",  var/"log/spoctunnel"
     inreplace "etc/newsyslog/spoctunnel.conf", "HOMEBREW_LOCALUSER",  ENV["USER"]
