@@ -109,6 +109,7 @@ New Version: ${newVersion}
 cd "${formulaName}" || exit
 xc "${lB}Tag and Push ${formulaName} repository
 ${lW}"
+sed -e 
 git commit -q -am "Ensuring Commit..."
 git checkout -q -f
 xc "${lB}
