@@ -42,6 +42,8 @@ class Spoctunnel < Formula
     # Create the log directory in the homebrew prefix
     (var/"log/spoctunnel").mkpath
     (var/"log/spoctunnel").chmod 0744
+    (var/"run/spoctunnel").mkpath
+    (var/"run/spoctunnel").chmod 0744
     (etc/"newsyslog.d/spoctunnel.conf").chmod 0744
     (etc/"resolver/spoc.charterlab.com").chmod 0744
     test_cmd = Open3.capture3("#{bin}/spoctunnel", "postinstall")
