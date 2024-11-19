@@ -42,10 +42,14 @@ class Spoctunnel < Formula
     # Create the log directory in the homebrew prefix
     (var/"log/spoctunnel").mkpath
     (var/"log/spoctunnel").chmod 0744
+    # Create the pidfile directory in the homebrew prefix
     (var/"run/spoctunnel").mkpath
     (var/"run/spoctunnel").chmod 0744
+    # Create newsyslog directory in homebrew prefix
     (etc/"newsyslog.d/spoctunnel.conf").chmod 0744
+    # Create resolver directory in homebrew prefix
     (etc/"resolver/spoc.charterlab.com").chmod 0744
+    # Run script with postinstall arg
     test_cmd = Open3.capture3("#{bin}/spoctunnel", "postinstall")
     puts test_cmd
   end
