@@ -1,10 +1,10 @@
 require 'formula'
 require 'open3'
 class Spoctunnel < Formula
-  version "13.2.0"
+  version "13.3.0"
   homepage "https://github.com/ajanis/spoctunnel"
-  url "https://github.com/ajanis/spoctunnel/releases/download/v13.2.0/v13.2.0.tar.gz"
-  sha256 "18ced244a467cc6c437bff048edcc976a807c4c22e328f2d216a214ca7b4fc41"
+  url "https://github.com/ajanis/spoctunnel/releases/download/v13.3.0/v13.3.0.tar.gz"
+  sha256 "8bda72c4ab34ef4cef43559046204bce6e06e8c68cbfbcd485e3130d850435e2"
 
   depends_on "sshuttle"
   depends_on "ajanis/custombrew/sshpass"
